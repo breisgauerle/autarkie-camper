@@ -8,7 +8,6 @@
   "seo_title": "Starlink Mini Test im Camper – Erfahrungen nach 3 Wochen",
   "seo_description": "Geschwindigkeit, Stromverbrauch und Montage: Unser Praxistest des Starlink Mini im Kastenwagen."
 }
----
 ## Aufbau
 
 Der Starlink Mini ist in zwei Minuten einsatzbereit und läuft direkt an 12 V über USB-C PD.

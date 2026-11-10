@@ -21,9 +21,10 @@ export const products: Product[] = Object.entries(productFiles)
 const articleFiles = import.meta.glob<string>("/src/content/articles/*.md", { eager: true, query: "?raw", import: "default" });
 export const articles: Article[] = Object.entries(articleFiles)
   .map(([p, raw]) => {
-    const idx = raw.indexOf("\n---");
-    const meta = JSON.parse(raw.slice(0, idx));
-    const body = raw.slice(idx + 4);
+    // Decap "json-frontmatter": a JSON object whose closing brace sits at line start, then Markdown.
+    const end = raw.search(/\n\}\s*(\n|$)/) + 2;
+    const meta = JSON.parse(raw.slice(0, end));
+    const body = raw.slice(end);
     return { ...meta, slug: p.split("/").pop()!.replace(".md", ""), html: marked.parse(body, { async: false }) as string };
   })
   .sort((a, b) => b.date.localeCompare(a.date));

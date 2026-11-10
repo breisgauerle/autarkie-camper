@@ -10,33 +10,167 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as InternetRouteImport } from './routes/internet'
+import { Route as KuehlungKochenRouteImport } from './routes/kuehlung-kochen'
+import { Route as RechnerRouteImport } from './routes/rechner'
+import { Route as StromSolarRouteImport } from './routes/strom-solar'
+import { Route as WasserAutarkieRouteImport } from './routes/wasser-autarkie'
+import { Route as RatgeberIndexRouteImport } from './routes/ratgeber.index'
+import { Route as RatgeberSlugRouteImport } from './routes/ratgeber.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InternetRoute = InternetRouteImport.update({
+  id: '/internet',
+  path: '/internet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KuehlungKochenRoute = KuehlungKochenRouteImport.update({
+  id: '/kuehlung-kochen',
+  path: '/kuehlung-kochen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RechnerRoute = RechnerRouteImport.update({
+  id: '/rechner',
+  path: '/rechner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StromSolarRoute = StromSolarRouteImport.update({
+  id: '/strom-solar',
+  path: '/strom-solar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WasserAutarkieRoute = WasserAutarkieRouteImport.update({
+  id: '/wasser-autarkie',
+  path: '/wasser-autarkie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RatgeberIndexRoute = RatgeberIndexRouteImport.update({
+  id: '/ratgeber/',
+  path: '/ratgeber/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RatgeberSlugRoute = RatgeberSlugRouteImport.update({
+  id: '/ratgeber/$slug',
+  path: '/ratgeber/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/internet': typeof InternetRoute
+  '/kuehlung-kochen': typeof KuehlungKochenRoute
+  '/rechner': typeof RechnerRoute
+  '/strom-solar': typeof StromSolarRoute
+  '/wasser-autarkie': typeof WasserAutarkieRoute
+  '/ratgeber/$slug': typeof RatgeberSlugRoute
+  '/ratgeber/': typeof RatgeberIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/internet': typeof InternetRoute
+  '/kuehlung-kochen': typeof KuehlungKochenRoute
+  '/rechner': typeof RechnerRoute
+  '/strom-solar': typeof StromSolarRoute
+  '/wasser-autarkie': typeof WasserAutarkieRoute
+  '/ratgeber/$slug': typeof RatgeberSlugRoute
+  '/ratgeber': typeof RatgeberIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/internet': typeof InternetRoute
+  '/kuehlung-kochen': typeof KuehlungKochenRoute
+  '/rechner': typeof RechnerRoute
+  '/strom-solar': typeof StromSolarRoute
+  '/wasser-autarkie': typeof WasserAutarkieRoute
+  '/ratgeber/$slug': typeof RatgeberSlugRoute
+  '/ratgeber/': typeof RatgeberIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/datenschutz'
+    | '/impressum'
+    | '/internet'
+    | '/kuehlung-kochen'
+    | '/rechner'
+    | '/strom-solar'
+    | '/wasser-autarkie'
+    | '/ratgeber/$slug'
+    | '/ratgeber/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/datenschutz'
+    | '/impressum'
+    | '/internet'
+    | '/kuehlung-kochen'
+    | '/rechner'
+    | '/strom-solar'
+    | '/wasser-autarkie'
+    | '/ratgeber/$slug'
+    | '/ratgeber'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/datenschutz'
+    | '/impressum'
+    | '/internet'
+    | '/kuehlung-kochen'
+    | '/rechner'
+    | '/strom-solar'
+    | '/wasser-autarkie'
+    | '/ratgeber/$slug'
+    | '/ratgeber/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  ImpressumRoute: typeof ImpressumRoute
+  InternetRoute: typeof InternetRoute
+  KuehlungKochenRoute: typeof KuehlungKochenRoute
+  RechnerRoute: typeof RechnerRoute
+  StromSolarRoute: typeof StromSolarRoute
+  WasserAutarkieRoute: typeof WasserAutarkieRoute
+  RatgeberSlugRoute: typeof RatgeberSlugRoute
+  RatgeberIndexRoute: typeof RatgeberIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +182,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/internet': {
+      id: '/internet'
+      path: '/internet'
+      fullPath: '/internet'
+      preLoaderRoute: typeof InternetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kuehlung-kochen': {
+      id: '/kuehlung-kochen'
+      path: '/kuehlung-kochen'
+      fullPath: '/kuehlung-kochen'
+      preLoaderRoute: typeof KuehlungKochenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rechner': {
+      id: '/rechner'
+      path: '/rechner'
+      fullPath: '/rechner'
+      preLoaderRoute: typeof RechnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/strom-solar': {
+      id: '/strom-solar'
+      path: '/strom-solar'
+      fullPath: '/strom-solar'
+      preLoaderRoute: typeof StromSolarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wasser-autarkie': {
+      id: '/wasser-autarkie'
+      path: '/wasser-autarkie'
+      fullPath: '/wasser-autarkie'
+      preLoaderRoute: typeof WasserAutarkieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/': {
+      id: '/ratgeber/'
+      path: '/ratgeber'
+      fullPath: '/ratgeber/'
+      preLoaderRoute: typeof RatgeberIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ratgeber/$slug': {
+      id: '/ratgeber/$slug'
+      path: '/ratgeber/$slug'
+      fullPath: '/ratgeber/$slug'
+      preLoaderRoute: typeof RatgeberSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  ImpressumRoute: ImpressumRoute,
+  InternetRoute: InternetRoute,
+  KuehlungKochenRoute: KuehlungKochenRoute,
+  RechnerRoute: RechnerRoute,
+  StromSolarRoute: StromSolarRoute,
+  WasserAutarkieRoute: WasserAutarkieRoute,
+  RatgeberSlugRoute: RatgeberSlugRoute,
+  RatgeberIndexRoute: RatgeberIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -31,7 +31,6 @@ collections:
     folder: src/content/articles
     extension: md
     format: json-frontmatter
-    frontmatter_delimiter: ["{", "}\n---"]
     create: true
     slug: "{{slug}}"
     fields:

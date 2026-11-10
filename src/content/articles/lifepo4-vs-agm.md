@@ -8,7 +8,6 @@
   "seo_title": "LiFePO4 oder AGM Batterie im Camper – der große Vergleich",
   "seo_description": "Nutzbare Kapazität, Gewicht, Zyklen und Kosten: So findest du die richtige Bordbatterie für deinen Camper."
 }
----
 ## Das Wichtigste in Kürze
 
 Eine **LiFePO4-Batterie** liefert rund 90 % ihrer Nennkapazität, eine AGM-Batterie nur etwa 50 %. Wer autark stehen möchte, kommt an Lithium kaum vorbei.
