@@ -17,7 +17,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-sidebar-border bg-secondary text-secondary-foreground">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
         <Link to="/" className="flex items-center gap-2 font-display text-lg font-semibold">
-          <Mountain className="size-6 text-primary-glow" /> autarkie-camper<span className="text-primary-glow">.de</span>
+          <Mountain className="size-6 text-primary-glow" /><span>autarkie-camper<span className="text-primary-glow">.de</span></span>
         </Link>
         <nav className="hidden gap-1 xl:flex">
           {NAV.map((n) => (
