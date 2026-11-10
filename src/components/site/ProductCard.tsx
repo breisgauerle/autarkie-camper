@@ -2,7 +2,7 @@ import { Check, Minus, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { amazonUrl, type Product } from "@/lib/content";
 
-export function ProductCard({ p, badge }: { p: Product; badge?: string }) {
+export function ProductCard({ p, badge }: { p: Product; badge?: string | undefined }) {
   const amz = amazonUrl(p.amazon_asin);
   return (
     <article className="flex flex-col rounded-xl border bg-card p-5 shadow-card">

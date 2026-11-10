@@ -21,10 +21,13 @@ export const Route = createFileRoute("/rechner")({
   component: Rechner,
 });
 
+type Row = { on: boolean; hours: number; watts: number };
+
 function Rechner() {
-  const [state, setState] = useState(() => Object.fromEntries(CONSUMERS.map((c) => [c.id, { on: ["kuehlbox", "licht", "laptop"].includes(c.id), hours: c.defaultHours, watts: c.watts }])));
-  const r = useMemo(() => calculate(CONSUMERS.filter((c) => state[c.id].on).map((c) => state[c.id])), [state]);
-  const set = (id: string, patch: Partial<(typeof state)[string]>) => setState((s) => ({ ...s, [id]: { ...s[id], ...patch } }));
+  const [state, setState] = useState<Record<string, Row>>(() => Object.fromEntries(CONSUMERS.map((c) => [c.id, { on: ["kuehlbox", "licht", "laptop"].includes(c.id), hours: c.defaultHours, watts: c.watts }])));
+  const row = (id: string): Row => state[id] ?? { on: false, hours: 0, watts: 0 };
+  const r = useMemo(() => calculate(CONSUMERS.map((c) => state[c.id]).filter((v): v is Row => !!v && v.on)), [state]);
+  const set = (id: string, patch: Partial<Row>) => setState((s) => ({ ...s, [id]: { ...(s[id] ?? { on: false, hours: 0, watts: 0 }), ...patch } }));
   const stations = products.filter((p) => p.type === "powerstation").sort((a, b) => a.capacity_wh - b.capacity_wh);
   const fitting = stations.filter((p) => p.capacity_wh >= r.wh);
   const shown = (fitting.length ? fitting : stations.slice(-1)).slice(0, 3);
@@ -37,7 +40,7 @@ function Rechner() {
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_380px]">
         <div className="divide-y rounded-xl border bg-card">
           {CONSUMERS.map((c) => {
-            const v = state[c.id];
+            const v = row(c.id);
             return (
               <div key={c.id} className="flex flex-wrap items-center gap-3 p-4">
                 <label className="flex min-w-48 flex-1 items-center gap-3 font-medium">
