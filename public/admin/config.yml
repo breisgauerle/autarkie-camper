@@ -1,0 +1,84 @@
+# Redaktions-Backend: Inhalte werden als Dateien im GitHub-Repository gespeichert.
+# "repo" auf dein GitHub-Repository anpassen (Benutzer/Repo-Name).
+backend:
+  name: github
+  repo: DEIN-GITHUB-NAME/autarkie-camper
+  branch: main
+local_backend: true
+locale: de
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: editorial_workflow
+
+collections:
+  - name: setup
+    label: "⚙️ Setup-Wizard"
+    files:
+      - name: site
+        label: "Einrichtung: Analytics & Affiliate-Netzwerke"
+        file: src/content/settings/site.json
+        format: json
+        fields:
+          - { name: ga4_id, label: "Schritt 1: Google Analytics Measurement ID (GA4, z. B. G-XXXXXXX) – wird nur nach Cookie-Zustimmung geladen", widget: string, required: false, pattern: ['^$|^G-[A-Z0-9]+$', "Format: G-XXXXXXX"] }
+          - { name: awin_id, label: "Schritt 2a: Awin Publisher-ID", widget: string, required: false }
+          - { name: tradetracker_id, label: "Schritt 2b: TradeTracker Site-ID", widget: string, required: false }
+          - { name: maentum_id, label: "Schritt 2c: Maentum Partner-ID", widget: string, required: false }
+          - { name: adcell_id, label: "Schritt 2d: ADCELL Promotion-ID", widget: string, required: false }
+          - { name: amazon_tag, label: "Schritt 2e: Amazon PartnerNet Tracking-ID (z. B. autarkie-21)", widget: string, required: false }
+
+  - name: articles
+    label: "📝 Blogartikel & Testberichte"
+    folder: src/content/articles
+    extension: md
+    format: json-frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Titel, widget: string }
+      - { name: date, label: Datum, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+      - name: category
+        label: Kategorie
+        widget: select
+        options:
+          - { label: "Strom & Solar", value: strom-solar }
+          - { label: "Internet & Connectivity", value: internet }
+          - { label: "Kühlung & Kochen", value: kuehlung-kochen }
+          - { label: "Wasser & Autarkie", value: wasser-autarkie }
+      - { name: type, label: Art, widget: select, options: [{ label: Ratgeber, value: ratgeber }, { label: Testbericht, value: testbericht }] }
+      - { name: image, label: Hauptbild, widget: image, required: false }
+      - { name: summary, label: Kurzbeschreibung, widget: text }
+      - { name: seo_title, label: "SEO-Titel", widget: string, required: false }
+      - { name: seo_description, label: "SEO-Beschreibung (max. 160 Zeichen)", widget: text, required: false }
+      - { name: body, label: Text, widget: markdown }
+
+  - name: products
+    label: "📊 Vergleichstabellen (Produkte)"
+    folder: src/content/products
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    identifier_field: name
+    fields:
+      - { name: name, label: Produktname, widget: string }
+      - name: category
+        label: Kategorie
+        widget: select
+        options:
+          - { label: "Strom & Solar", value: strom-solar }
+          - { label: "Internet & Connectivity", value: internet }
+          - { label: "Kühlung & Kochen", value: kuehlung-kochen }
+          - { label: "Wasser & Autarkie", value: wasser-autarkie }
+      - { name: type, label: "Produkttyp (powerstation = erscheint im Stromrechner)", widget: select, options: [powerstation, batterie, solar, internet, kuehlung, kochen, wasser, sonstiges] }
+      - { name: capacity_wh, label: "Kapazität in Wh (nur Powerstationen, sonst 0)", widget: number, value_type: int, default: 0 }
+      - { name: image, label: Produktbild, widget: image, required: false }
+      - name: specs
+        label: Spezifikationen
+        widget: list
+        fields:
+          - { name: label, label: Merkmal, widget: string }
+          - { name: value, label: Wert, widget: string }
+      - { name: pros, label: Vorteile, widget: list, field: { name: item, label: Vorteil, widget: string } }
+      - { name: cons, label: Nachteile, widget: list, field: { name: item, label: Nachteil, widget: string } }
+      - { name: merchant_url, label: "Affiliate-Link Fachhändler (Awin/TradeTracker/ADCELL/Maentum-Deeplink)", widget: string, required: false }
+      - { name: amazon_asin, label: "Amazon ASIN (Tracking-ID wird automatisch ergänzt)", widget: string, required: false }
