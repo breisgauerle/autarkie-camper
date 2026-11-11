@@ -2,6 +2,10 @@ DirectoryIndex index.html
 Options -Indexes -MultiViews
 ErrorDocument 404 /404/index.html
 
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   # Never rewrite real assets or the Decap entry point.
