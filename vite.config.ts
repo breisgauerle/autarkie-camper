@@ -20,7 +20,7 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
-    pages: ["/", "/strom-solar", "/internet", "/kuehlung-kochen", "/wasser-autarkie", "/rechner", "/ratgeber", "/impressum", "/datenschutz", "/admin/status", ...articlePaths].map(path => ({ path })),
+    pages: ["/", "/strom-solar", "/internet", "/kuehlung-kochen", "/wasser-autarkie", "/rechner", "/ratgeber", "/impressum", "/datenschutz", "/admin/status", "/404", ...articlePaths].map(path => ({ path })),
     // /admin is served by the existing public/admin/index.html, not prerendered.
     prerender: { enabled: true, autoStaticPathsDiscovery: false, crawlLinks: false },
   },

@@ -93,6 +93,7 @@ In der Redaktion unter **Vergleichstabellen (Produkte) → Händlerangebote** k�
 ```sh
 bun install
 bun run build
+node scripts/prepare-static.mjs dist/client
 node scripts/verify-static.mjs dist/client
 ```
 
@@ -102,7 +103,9 @@ Nach erfolgreicher Prüfung den **Inhalt von `dist/client/`**, einschließlich d
 
 Nach dem Upload Startseite, `/strom-solar`, `/rechner`, einen Artikel, `/impressum`, `/admin/` und `/admin/status` direkt aufrufen und neu laden. Die GitHub-Anmeldung funktioniert nur nach vollständiger OAuth-Einrichtung in GitHub/Netlify. Änderungen in Decap ändern Repository-Dateien; für Alfahosting ist danach immer ein neuer Build und Upload erforderlich.
 
-Vor Veröffentlichung die bereits vorhandenen Beispiel-Händlerlinks, ASINs und Produktangaben prüfen und ersetzen. Impressum, Datenschutz, Affiliate-Kennzeichnung und Analytics-Einwilligung rechtlich prüfen lassen. Ein fertiges Upload-Archiv ist erst nach erfolgreichem statischen Build möglich.
+Die Apache-Konfiguration liefert vorhandene Seiten mit und ohne abschließenden Schrägstrich aus (Apache darf zur Verzeichnis-URL weiterleiten). Unbekannte Seiten und fehlende Dateien erhalten einen echten HTTP-404-Status mit der deutschen Fehlerseite aus `404/index.html`; es gibt keinen pauschalen Startseiten-Fallback. Wenn Rewrite-Regeln deaktiviert sind, sind Seiten weiterhin über die Verzeichnis-URLs mit abschließendem Schrägstrich erreichbar. Im getesteten Apache-Aufbau gilt `AllowOverride All`; eingeschränkte Freigaben müssen alle verwendeten Direktiven erlauben. `mod_rewrite`, `mod_dir`, `mod_mime`, `mod_negotiation` und `mod_authz_core` müssen verfügbar sein. Punktdateien wie `.htaccess` sind nicht öffentlich abrufbar.
+
+Vor Veröffentlichung die bereits vorhandenen Beispiel-Händlerlinks, ASINs und Produktangaben prüfen und ersetzen. Impressum, Datenschutz, Affiliate-Kennzeichnung und Analytics-Einwilligung rechtlich prüfen lassen.
 
 ## Build with Lovable
 
