@@ -19,4 +19,5 @@ const assets = await readdir(join(directory, "assets"));
 if (!assets.some(file => file.endsWith(".woff2"))) throw new Error("Local WOFF2 fonts missing");
 const apache = await readFile(join(directory, ".htaccess"), "utf8");
 if (!apache.includes("ErrorDocument 404 /404/index.html")) throw new Error("Apache 404 fallback missing");
+if (/<script\b/i.test(await readFile(join(directory, "404/index.html"), "utf8"))) throw new Error("Apache error document must not hydrate at an unknown URL; run prepare-static.mjs");
 console.log(`Static export verified: ${pages.length} HTML pages, admin, Apache settings and local fonts in ${directory}`);

@@ -65,7 +65,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "autarkie-camper.de – Autarke Camping-Ausstattung im Vergleich" },
       { name: "description", content: "Vergleiche, Tests und Rechner für autarkes Reisen mit Camper und Wohnmobil." },
-      { name: "author", content: "Ingo Kropat" },
       { property: "og:title", content: "autarkie-camper.de" },
       { property: "og:description", content: "Vergleiche, Tests und Rechner für autarkes Reisen." },
       { property: "og:type", content: "website" },

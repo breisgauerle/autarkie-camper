@@ -93,6 +93,7 @@ In der Redaktion unter **Vergleichstabellen (Produkte) → Händlerangebote** k�
 ```sh
 bun install
 bun run build
+node scripts/prepare-static.mjs dist/client
 node scripts/verify-static.mjs dist/client
 ```
 
