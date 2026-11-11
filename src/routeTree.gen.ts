@@ -18,6 +18,7 @@ import { Route as KuehlungKochenRouteImport } from './routes/kuehlung-kochen'
 import { Route as RechnerRouteImport } from './routes/rechner'
 import { Route as StromSolarRouteImport } from './routes/strom-solar'
 import { Route as WasserAutarkieRouteImport } from './routes/wasser-autarkie'
+import { Route as AdminStatusRouteImport } from './routes/admin_.status'
 import { Route as RatgeberIndexRouteImport } from './routes/ratgeber.index'
 import { Route as RatgeberSlugRouteImport } from './routes/ratgeber.$slug'
 
@@ -66,6 +67,11 @@ const WasserAutarkieRoute = WasserAutarkieRouteImport.update({
   path: '/wasser-autarkie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStatusRoute = AdminStatusRouteImport.update({
+  id: '/admin_/status',
+  path: '/admin/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RatgeberIndexRoute = RatgeberIndexRouteImport.update({
   id: '/ratgeber/',
   path: '/ratgeber/',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/rechner': typeof RechnerRoute
   '/strom-solar': typeof StromSolarRoute
   '/wasser-autarkie': typeof WasserAutarkieRoute
+  '/admin/status': typeof AdminStatusRoute
   '/ratgeber/$slug': typeof RatgeberSlugRoute
   '/ratgeber/': typeof RatgeberIndexRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/rechner': typeof RechnerRoute
   '/strom-solar': typeof StromSolarRoute
   '/wasser-autarkie': typeof WasserAutarkieRoute
+  '/admin/status': typeof AdminStatusRoute
   '/ratgeber/$slug': typeof RatgeberSlugRoute
   '/ratgeber': typeof RatgeberIndexRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/rechner': typeof RechnerRoute
   '/strom-solar': typeof StromSolarRoute
   '/wasser-autarkie': typeof WasserAutarkieRoute
+  '/admin_/status': typeof AdminStatusRoute
   '/ratgeber/$slug': typeof RatgeberSlugRoute
   '/ratgeber/': typeof RatgeberIndexRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/rechner'
     | '/strom-solar'
     | '/wasser-autarkie'
+    | '/admin/status'
     | '/ratgeber/$slug'
     | '/ratgeber/'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/rechner'
     | '/strom-solar'
     | '/wasser-autarkie'
+    | '/admin/status'
     | '/ratgeber/$slug'
     | '/ratgeber'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/rechner'
     | '/strom-solar'
     | '/wasser-autarkie'
+    | '/admin_/status'
     | '/ratgeber/$slug'
     | '/ratgeber/'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   RechnerRoute: typeof RechnerRoute
   StromSolarRoute: typeof StromSolarRoute
   WasserAutarkieRoute: typeof WasserAutarkieRoute
+  AdminStatusRoute: typeof AdminStatusRoute
   RatgeberSlugRoute: typeof RatgeberSlugRoute
   RatgeberIndexRoute: typeof RatgeberIndexRoute
 }
@@ -238,6 +251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WasserAutarkieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin_/status': {
+      id: '/admin_/status'
+      path: '/admin/status'
+      fullPath: '/admin/status'
+      preLoaderRoute: typeof AdminStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ratgeber/': {
       id: '/ratgeber/'
       path: '/ratgeber'
@@ -265,6 +285,7 @@ const rootRouteChildren: RootRouteChildren = {
   RechnerRoute: RechnerRoute,
   StromSolarRoute: StromSolarRoute,
   WasserAutarkieRoute: WasserAutarkieRoute,
+  AdminStatusRoute: AdminStatusRoute,
   RatgeberSlugRoute: RatgeberSlugRoute,
   RatgeberIndexRoute: RatgeberIndexRoute,
 }
