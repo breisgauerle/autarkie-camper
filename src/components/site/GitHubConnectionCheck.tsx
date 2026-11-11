@@ -3,7 +3,7 @@ import { Github, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { checkGitHubAccess, type GitHubCheckResult } from "@/lib/github-check";
 
-export function GitHubConnectionCheck({ repo, branch }: { repo?: string; branch?: string }) {
+export function GitHubConnectionCheck({ repo, branch }: { repo: string | undefined; branch: string | undefined }) {
   const [checking, setChecking] = useState(false);
   const [result, setResult] = useState<GitHubCheckResult>();
   const [checkedAt, setCheckedAt] = useState("");
