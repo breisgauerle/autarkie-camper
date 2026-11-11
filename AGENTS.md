@@ -32,3 +32,4 @@ use the editor.
 ## Project rules
 - Content (articles, products, settings) lives as files in src/content and is edited via Decap CMS (public/admin/config.yml); pages read it with import.meta.glob so the site needs no database.
 - Articles use Decap json-frontmatter (JSON object, then Markdown); keep the parser in src/lib/content.ts in sync with that format.
+- Admin status reads the public Decap configuration in the browser and returns only validated allowlisted fields; external account setup stays unverified because no authenticated connection is inspected.
