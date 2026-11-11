@@ -1,9 +1,10 @@
 import { Check, Minus, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { amazonUrl, type Product } from "@/lib/content";
+import { settings, type Product } from "@/lib/content";
+import { productAffiliateLinks } from "@/lib/affiliate-links";
 
 export function ProductCard({ p, badge }: { p: Product; badge?: string | undefined }) {
-  const amz = amazonUrl(p.amazon_asin);
+  const offers = productAffiliateLinks(p, settings.amazon_tag);
   return (
     <article className="flex flex-col rounded-xl border bg-card p-5 shadow-card">
       {p.image && <img src={p.image} alt={p.name} loading="lazy" className="mb-4 aspect-[4/3] w-full rounded-lg object-cover" />}
@@ -19,8 +20,7 @@ export function ProductCard({ p, badge }: { p: Product; badge?: string | undefin
         {p.cons.map((x) => <li key={x} className="flex gap-2 text-muted-foreground"><Minus className="size-4 shrink-0 text-destructive" />{x}</li>)}
       </ul>
       <div className="mt-auto flex flex-col gap-2 pt-5">
-        {p.merchant_url && <Button asChild><a href={p.merchant_url} target="_blank" rel="sponsored nofollow noopener">Beim Fachhändler* <ExternalLink /></a></Button>}
-        {amz && <Button asChild variant="cta"><a href={amz} target="_blank" rel="sponsored nofollow noopener">Bei Amazon ansehen*</a></Button>}
+        {offers.map((offer, index) => <Button key={`${offer.url}/${index}`} asChild variant={index === 0 ? "default" : "outline"} className="h-auto min-h-9 py-2"><a href={offer.url} target="_blank" rel="sponsored nofollow noopener noreferrer"><span className="min-w-0 whitespace-normal break-words">{offer.label}*</span><ExternalLink className="shrink-0" /></a></Button>)}
       </div>
     </article>
   );

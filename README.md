@@ -82,6 +82,28 @@ Integriere unter der Rubrik "Rechner & Tools" ein interaktives Widget ("Der Camp
 
 This project was built with [Lovable](https://lovable.dev).
 
+## Lokale Schriften und Produktangebote
+
+Manrope und Fraunces werden über lokal installierte Fontsource-Pakete eingebunden; es gibt keine Google-Fonts-Anfragen mehr. Dies beseitigt die externe Schriftübertragung, ist aber keine Garantie für die DSGVO-Konformität der gesamten Website.
+
+In der Redaktion unter **Vergleichstabellen (Produkte) → Händlerangebote** können bis zu drei Angebote mit eigener Button-Beschriftung und vollständigem HTTPS-Affiliate-Link gepflegt werden. Die Vorlage `templates/produkt.json` enthält Platzhalter für Shop A, Shop B und Amazon; diese müssen durch echte Produktdaten und Links ersetzt werden. Die Vorlage wird nicht als Produkt veröffentlicht. Bei den neuen Amazon-Angeboten den vollständigen Link mit Tracking-ID eintragen. Bestehende Produkte nutzen weiterhin ihre bisherigen Händlerfelder und die automatische Amazon-Tracking-ID, solange keine neue Angebotsliste gespeichert wurde.
+
+## Statischer HTML-Export für Alfahosting
+
+```sh
+bun install
+bun run build
+node scripts/verify-static.mjs dist/client
+```
+
+Der Build rendert alle öffentlichen Seiten, alle Markdown-Artikel und die Admin-Statusseite vorab als HTML. `/admin/index.html` bleibt das vorhandene Decap CMS. Es ist kein Node-Server bei Alfahosting erforderlich; Rechner, Cookie-Einstellungen und GitHub-Prüfung laufen im Browser.
+
+Nach erfolgreicher Prüfung den **Inhalt von `dist/client/`**, einschließlich der versteckten `.htaccess`, unverändert in das Dokumentenverzeichnis der Domain bei Alfahosting hochladen. Nicht `dist/server`, Quellcode, `.env` oder `node_modules` hochladen. Die Ordner `assets`, `admin`, `uploads` (falls vorhanden) und alle Seitenordner müssen erhalten bleiben. Die Konfiguration setzt ein Apache-Webhosting mit erlaubter `.htaccess`-Nutzung und eine Domaininstallation im Stammverzeichnis voraus. HTTPS bei Alfahosting aktivieren.
+
+Nach dem Upload Startseite, `/strom-solar`, `/rechner`, einen Artikel, `/impressum`, `/admin/` und `/admin/status` direkt aufrufen und neu laden. Die GitHub-Anmeldung funktioniert nur nach vollständiger OAuth-Einrichtung in GitHub/Netlify. Änderungen in Decap ändern Repository-Dateien; für Alfahosting ist danach immer ein neuer Build und Upload erforderlich.
+
+Vor Veröffentlichung die bereits vorhandenen Beispiel-Händlerlinks, ASINs und Produktangaben prüfen und ersetzen. Impressum, Datenschutz, Affiliate-Kennzeichnung und Analytics-Einwilligung rechtlich prüfen lassen. Ein fertiges Upload-Archiv ist erst nach erfolgreichem statischen Build möglich.
+
 ## Build with Lovable
 
 Continue developing this project in the [Lovable editor](https://lovable.dev/projects/8ef9999b-ffc2-4343-b9ac-1f965e25c968).

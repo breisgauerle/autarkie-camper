@@ -6,8 +6,10 @@
  *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
  */
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
+@import "@fontsource-variable/manrope";
+@import "@fontsource-variable/fraunces/standard.css";
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -65,8 +67,8 @@
   --color-primary-glow: var(--primary-glow);
   --color-cta: var(--cta);
   --color-cta-foreground: var(--cta-foreground);
-  --font-display: "Fraunces", Georgia, serif;
-  --font-sans: "Manrope", system-ui, sans-serif;
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-sans: "Manrope Variable", system-ui, sans-serif;
   --shadow-card: var(--shadow-card);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);

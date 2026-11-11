@@ -85,5 +85,17 @@ collections:
           - { name: value, label: Wert, widget: string }
       - { name: pros, label: Vorteile, widget: list, field: { name: item, label: Vorteil, widget: string } }
       - { name: cons, label: Nachteile, widget: list, field: { name: item, label: Nachteil, widget: string } }
+      - name: affiliate_links
+        label: "Händlerangebote (maximal 3)"
+        label_singular: "Händlerangebot"
+        widget: list
+        required: false
+        min: 0
+        max: 3
+        summary: "{{fields.label}}"
+        hint: "Eigene Button-Beschriftung und vollständiger HTTPS-Affiliate-Link, z. B. Shop A, Shop B oder Amazon. Bei Amazon hier den vollständigen Link inklusive Tracking-ID eintragen. Diese Liste ersetzt die bisherigen Händler- und Amazon-Felder."
+        fields:
+          - { name: label, label: "Button-Beschriftung", widget: string }
+          - { name: url, label: "Affiliate-Link", widget: string, pattern: ['^https://[^\s]+$', "Bitte einen vollständigen HTTPS-Link eingeben."] }
       - { name: merchant_url, label: "Affiliate-Link Fachhändler (Awin/TradeTracker/ADCELL/Maentum-Deeplink)", widget: string, required: false }
       - { name: amazon_asin, label: "Amazon ASIN (Tracking-ID wird automatisch ergänzt)", widget: string, required: false }
