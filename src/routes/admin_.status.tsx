@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AlertCircle, CheckCircle2, ExternalLink, Github, RefreshCw, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { readAdminStatus, type AdminSetting } from "@/lib/admin-status";
+import { GitHubConnectionCheck } from "@/components/site/GitHubConnectionCheck";
 
 export const Route = createFileRoute("/admin_/status")({
   head: () => ({ meta: [
@@ -42,6 +43,7 @@ function AdminStatusPage() {
 
   const missing = settings.filter(s => s.status !== "configured");
   const repo = settings.find(s => s.label === "GitHub-Repository" && s.status === "configured")?.value;
+  const branch = settings.find(s => s.label === "Branch" && s.status === "configured")?.value;
   return (
     <div className="mx-auto max-w-5xl px-5 py-12 md:py-16">
       <div className="mb-8 flex flex-wrap items-start justify-between gap-5">
@@ -57,7 +59,7 @@ function AdminStatusPage() {
 
       <div className="mb-8 flex items-start gap-3 border-y border-border py-5 text-sm text-muted-foreground">
         <ShieldCheck className="size-5 shrink-0 text-primary" />
-        <p>Nur öffentliche Einstellungen. Zugangsdaten, Tokens und Secrets werden nicht angezeigt. GitHub-Zugriff und die Einrichtung in Netlify sind hier nicht überprüfbar.</p>
+        <p>Zugangsdaten, Tokens und Secrets werden nicht angezeigt. Der GitHub-Zugriff lässt sich mit der bestehenden Admin-Anmeldung prüfen; die Einrichtung in Netlify bleibt ungeprüft.</p>
       </div>
 
       <section aria-labelledby="config-title" aria-busy={loading}>
@@ -78,12 +80,13 @@ function AdminStatusPage() {
         {checkedAt && !error && <p className="mt-3 text-xs text-muted-foreground">Konfiguration gelesen: {checkedAt} · „Hinterlegt“ bestätigt keine erfolgreiche Verbindung.</p>}
       </section>
 
+      <GitHubConnectionCheck key={`${repo}/${branch}/${revision}`} repo={loading ? undefined : repo} branch={loading ? undefined : branch} />
+
       <section className="mt-10" aria-labelledby="steps-title">
         <h2 id="steps-title" className="text-2xl">Noch zu prüfen</h2>
         <p className="mt-2 text-sm text-muted-foreground">Diese Kontoeinstellungen sind nicht öffentlich einsehbar. Ihr Status bleibt ungeprüft.</p>
         <ul className="mt-5 divide-y divide-border">
           {[
-            ["GitHub-Repository & Schreibzugriff", "Das Repository und der konfigurierte Branch müssen existieren; dein GitHub-Konto braucht Schreibzugriff."],
             ["GitHub OAuth App", "Callback-URL: https://api.netlify.com/auth/done"],
             ["Netlify Authentication Provider", "GitHub als OAuth-Anbieter einrichten. Client ID und Client Secret ausschließlich dort hinterlegen."],
             ["Netlify-Domainzuordnung", "Die Website-Domain muss dem Netlify-Projekt für die Anmeldung zugeordnet sein."],
