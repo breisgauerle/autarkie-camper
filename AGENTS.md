@@ -33,3 +33,6 @@ use the editor.
 - Content (articles, products, settings) lives as files in src/content and is edited via Decap CMS (public/admin/config.yml); pages read it with import.meta.glob so the site needs no database.
 - Articles use Decap json-frontmatter (JSON object, then Markdown); keep the parser in src/lib/content.ts in sync with that format.
 - Admin status shows only validated allowlisted Decap settings; its explicit read-only GitHub check uses the existing decap-cms-user GitHub session only against api.github.com with redirects disabled and sanitized results, while Netlify account setup stays unverified.
+- Fonts are bundled from Fontsource packages rather than external stylesheets to avoid third-party font requests.
+- Products use an optional affiliate_links list capped at three validated HTTPS offers; an explicit list replaces legacy offers while absent lists retain legacy Amazon tagging.
+- Static export enumerates public routes and article files at build time, excludes the existing static Decap admin entry from prerendering, and uploads only verified dist/client output to Apache hosting.

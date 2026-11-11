@@ -8,11 +8,20 @@
 // hosting already compresses at the edge.
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { readdirSync } from "node:fs";
+
+// Enumerate article URLs on every build, including articles added through Decap.
+const articlePaths = readdirSync(new URL("./src/content/articles/", import.meta.url))
+  .filter(file => file.endsWith(".md"))
+  .map(file => `/ratgeber/${file.slice(0, -3)}`);
 
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    pages: ["/", "/strom-solar", "/internet", "/kuehlung-kochen", "/wasser-autarkie", "/rechner", "/ratgeber", "/impressum", "/datenschutz", "/admin/status", ...articlePaths].map(path => ({ path })),
+    // /admin is served by the existing public/admin/index.html, not prerendered.
+    prerender: { enabled: true, autoStaticPathsDiscovery: false, crawlLinks: false },
   },
 });

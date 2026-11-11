@@ -25,7 +25,7 @@ export const Route = createFileRoute("/datenschutz")({
       <h2 className="text-xl font-semibold text-foreground">Affiliate-Links</h2>
       <p>Beim Klick auf Partnerlinks (Amazon, Awin, TradeTracker, Maentum, ADCELL) wirst du zur Seite des Anbieters weitergeleitet; dort können Cookies zur Provisionszuordnung gesetzt werden.</p>
       <h2 className="text-xl font-semibold text-foreground">Schriftarten</h2>
-      <p>Wir nutzen Google Fonts. Für maximale DSGVO-Sicherheit empfehlen wir, die Schriften lokal einzubinden.</p>
+      <p>Die Schriftarten Manrope und Fraunces werden lokal von dieser Website geladen. Beim Laden der Schriften wird keine Verbindung zu Google hergestellt.</p>
       <h2 className="text-xl font-semibold text-foreground">Deine Rechte</h2>
       <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei einer Aufsichtsbehörde.</p>
     </div>

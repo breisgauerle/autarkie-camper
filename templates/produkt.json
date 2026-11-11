@@ -1,0 +1,15 @@
+{
+  "name": "Produktname hier eintragen",
+  "category": "strom-solar",
+  "type": "powerstation",
+  "capacity_wh": 0,
+  "image": "",
+  "specs": [{ "label": "Merkmal", "value": "Wert" }],
+  "pros": ["Vorteil eintragen"],
+  "cons": ["Nachteil eintragen"],
+  "affiliate_links": [
+    { "label": "Angebot bei Shop A", "url": "https://shop-a.example/produkt" },
+    { "label": "Preis bei Shop B prüfen", "url": "https://shop-b.example/produkt" },
+    { "label": "Bei Amazon ansehen", "url": "https://www.amazon.de/dp/ASIN_EINTRAGEN?tag=TRACKING_ID_EINTRAGEN" }
+  ]
+}
