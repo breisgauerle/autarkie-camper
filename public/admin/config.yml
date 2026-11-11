@@ -1,9 +1,14 @@
 # Redaktions-Backend: Inhalte werden als Dateien im GitHub-Repository gespeichert.
-# "repo" auf dein GitHub-Repository anpassen (Benutzer/Repo-Name).
+# Die GitHub-Anmeldung läuft über Netlify; das Website-Hosting bleibt unverändert.
+# Voraussetzung: In Netlify unter Project configuration > Security > OAuth
+# muss GitHub als Authentication Provider eingerichtet sein.
 backend:
   name: github
-  repo: DEIN-GITHUB-NAME/autarkie-camper
+  repo: breisgauerle/autarkie-camper
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+  site_domain: autarkie-camper.de
 local_backend: true
 locale: de
 media_folder: public/uploads
