@@ -1,15 +1,19 @@
 DirectoryIndex index.html
 Options -Indexes -MultiViews
+ErrorDocument 404 /404/index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Keep the Decap admin and real assets untouched.
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
+  # Never rewrite real assets or the Decap entry point.
+  RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
-  # Serve each generated page at its original URL, without an SPA fallback.
+  # Run before the directory check so deep links also work without a trailing slash.
   RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
   RewriteRule ^(.+?)/?$ $1/index.html [L]
+  # Existing directories retain normal DirectoryIndex handling (including /admin/).
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  # No catch-all to index.html: unknown pages and missing assets stay HTTP 404.
 </IfModule>
 
 <IfModule mod_mime.c>
