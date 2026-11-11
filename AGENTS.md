@@ -37,3 +37,4 @@ use the editor.
 - Products use an optional affiliate_links list capped at three validated HTTPS offers; an explicit list replaces legacy offers while absent lists retain legacy Amazon tagging.
 - Static export enumerates public routes and article files at build time, excludes the existing static Decap admin entry from prerendering, and uploads only verified dist/client output to Apache hosting.
 - Apache serves exported route index files before directory handling and uses the shared prerendered /404 page as ErrorDocument; missing URLs and assets must retain HTTP 404, never an HTTP 200 SPA fallback.
+- Preserve trailing slashes in TanStack Router so directory-serving preview/Apache URLs and slashless links do not form redirect loops during static prerendering.
