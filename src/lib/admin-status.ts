@@ -10,7 +10,7 @@ function record(value: unknown): Record<string, unknown> {
 
 // Only these public fields may leave the parser; never return raw config or errors.
 export function readAdminStatus(source: string): AdminSetting[] {
-  const backend = record(record(parse(source)).backend);
+  const backend = record(record(parse(source))["backend"]);
   const field = (label: string, key: string, valid: (value: string) => boolean): AdminSetting => {
     const value = backend[key];
     if (value === undefined || value === null || value === "") return { label, value: "Nicht hinterlegt", status: "missing" };
