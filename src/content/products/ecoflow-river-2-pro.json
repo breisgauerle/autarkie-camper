@@ -1,1 +1,30 @@
-{"name":"EcoFlow River 2 Pro","category":"strom-solar","type":"powerstation","capacity_wh":768,"image":"","specs":[{"label":"Kapazität","value":"768 Wh LiFePO4"},{"label":"Ausgang","value":"800 W (X-Boost 1.600 W)"},{"label":"Gewicht","value":"7,8 kg"}],"pros":["Sehr schnelles Laden (70 Min.)","Langlebige LiFePO4-Zellen"],"cons":["Kein kabelloses Laden"],"merchant_url":"https://www.example-fachhandel.de/ecoflow-river-2-pro","amazon_asin":"B0B6GQ2C5P"}
+{
+  "pros": [
+    "Sehr schnelles Laden (70 Min.)",
+    "Langlebige LiFePO4-Zellen"
+  ],
+  "name": "EcoFlow River 2 Pro",
+  "cons": [
+    "Kein kabelloses Laden"
+  ],
+  "amazon_asin": "B0BFQD5RMJ",
+  "capacity_wh": 768,
+  "specs": [
+    {
+      "label": "Kapazität",
+      "value": "768 Wh LiFePO4"
+    },
+    {
+      "label": "Ausgang",
+      "value": "800 W (X-Boost 1.600 W)"
+    },
+    {
+      "label": "Gewicht",
+      "value": "7,8 kg"
+    }
+  ],
+  "merchant_url": "https://www.example-fachhandel.de/ecoflow-river-2-pro",
+  "type": "powerstation",
+  "image": "",
+  "category": "strom-solar"
+}
