@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { CookieBanner } from "@/components/site/CookieBanner";
+import { LiveArticles } from "@/components/site/LiveArticles";
 import { NotFoundPage } from "@/components/site/NotFoundPage";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -103,6 +104,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <LiveArticles>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Header />
       <main className="min-h-[70vh]">
@@ -110,6 +112,7 @@ function RootComponent() {
       </main>
       <Footer />
       <CookieBanner />
+      </LiveArticles>
     </QueryClientProvider>
   );
 }

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { articles } from "@/lib/content";
+import { useArticles } from "@/components/site/LiveArticles";
 
 export const Route = createFileRoute("/ratgeber/")({
   head: () => ({
@@ -12,7 +12,12 @@ export const Route = createFileRoute("/ratgeber/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => (
+  component: Guides,
+});
+
+function Guides() {
+  const { articles } = useArticles();
+  return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <h1 className="text-4xl font-semibold md:text-5xl">Testberichte & Ratgeber</h1>
       <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -28,5 +33,5 @@ export const Route = createFileRoute("/ratgeber/")({
         ))}
       </div>
     </div>
-  ),
-});
+  );
+}

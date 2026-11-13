@@ -78,7 +78,7 @@ Integriere unter der Rubrik "Rechner & Tools" ein interaktives Widget ("Der Camp
 
 - PLZ & Ort: 79410 Badenweiler
 
-- E-Mail: mail@autarkie-camper.de
+- E-Mail: im Impressum ausschließlich als Canvas dargestellt.
 
 This project was built with [Lovable](https://lovable.dev).
 
@@ -103,9 +103,9 @@ Die Vorbereitung lädt öffentliche CDN-Bilder in den Ordner `__l5e` des Exports
 
 Nach erfolgreicher Prüfung den **Inhalt von `dist/client/`**, einschließlich der versteckten `.htaccess`, unverändert in das Dokumentenverzeichnis der Domain bei Alfahosting hochladen. Nicht `dist/server`, Quellcode, `.env` oder `node_modules` hochladen. Die Ordner `assets`, `admin`, `uploads` (falls vorhanden) und alle Seitenordner müssen erhalten bleiben. Die Konfiguration setzt ein Apache-Webhosting mit erlaubter `.htaccess`-Nutzung und eine Domaininstallation im Stammverzeichnis voraus. HTTPS bei Alfahosting aktivieren.
 
-Nach dem Upload Startseite, `/strom-solar`, `/rechner`, einen Artikel, `/impressum`, `/admin/` und `/admin/status` direkt aufrufen und neu laden. Die GitHub-Anmeldung funktioniert nur nach vollständiger OAuth-Einrichtung in GitHub/Netlify. Änderungen in Decap ändern Repository-Dateien; für Alfahosting ist danach immer ein neuer Build und Upload erforderlich.
+Nach dem Upload Startseite, `/strom-solar`, `/rechner`, einen Artikel, `/impressum`, `/admin/` und `/admin/status` direkt aufrufen und neu laden. Die GitHub-Anmeldung funktioniert nur nach vollständiger OAuth-Einrichtung in GitHub/Netlify. Nach dem einmaligen Upload dieser Version inklusive `_shell/` und `.htaccess` werden veröffentlichte Artikel automatisch aus dem öffentlichen Repository geladen: auf Startseite, Ratgeber, Kategorien und unter neuen direkten Artikel-URLs. Produkte, Einstellungen und Programmänderungen benötigen weiterhin einen neuen Export/Upload.
 
-Die Apache-Konfiguration liefert vorhandene Seiten mit und ohne abschließenden Schrägstrich aus (Apache darf zur Verzeichnis-URL weiterleiten). Unbekannte Seiten und fehlende Dateien erhalten einen echten HTTP-404-Status mit der deutschen Fehlerseite aus `404/index.html`; es gibt keinen pauschalen Startseiten-Fallback. Wenn Rewrite-Regeln deaktiviert sind, sind Seiten weiterhin über die Verzeichnis-URLs mit abschließendem Schrägstrich erreichbar. Im getesteten Apache-Aufbau gilt `AllowOverride All`; eingeschränkte Freigaben müssen alle verwendeten Direktiven erlauben. `mod_rewrite`, `mod_dir`, `mod_mime`, `mod_negotiation` und `mod_authz_core` müssen verfügbar sein. Punktdateien wie `.htaccess` sind nicht öffentlich abrufbar.
+Die Apache-Konfiguration liefert vorhandene Seiten mit und ohne abschließenden Schrägstrich aus (Apache darf zur Verzeichnis-URL weiterleiten). Nur neue extensionlose URLs unter `/ratgeber/` erhalten die Clientseite aus `_shell/index.html` (HTTP 200, auch bei nicht existierendem Artikel); alle anderen unbekannten Seiten und fehlenden Dateien erhalten einen echten HTTP-404-Status mit der deutschen Fehlerseite aus `404/index.html`; es gibt keinen pauschalen Startseiten-Fallback. Wenn Rewrite-Regeln deaktiviert sind, sind Seiten weiterhin über die Verzeichnis-URLs mit abschließendem Schrägstrich erreichbar. Im getesteten Apache-Aufbau gilt `AllowOverride All`; eingeschränkte Freigaben müssen alle verwendeten Direktiven erlauben. `mod_rewrite`, `mod_dir`, `mod_mime`, `mod_negotiation` und `mod_authz_core` müssen verfügbar sein. Punktdateien wie `.htaccess` sind nicht öffentlich abrufbar.
 
 Vor Veröffentlichung die bereits vorhandenen Beispiel-Händlerlinks, ASINs und Produktangaben prüfen und ersetzen. Impressum, Datenschutz, Affiliate-Kennzeichnung und Analytics-Einwilligung rechtlich prüfen lassen.
 
@@ -127,3 +127,11 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## Automatische Artikelveröffentlichung
+
+In Decap speichern/veröffentlichen, anschließend die Website neu laden. Der Browser liest den konfigurierten Branch aus `/admin/config.yml`; keine Zugangsdaten werden übertragen. GitHub meldete `breisgauerle/autarkie-camper` am 13.11.2026 mit HTTP 404: öffentliche Lesbarkeit muss hergestellt werden, sonst bleiben lokal exportierte Artikel sichtbar. Die externe Netlify/GitHub-Anmeldung bleibt unbestätigt. Andere Entwurfsbranches sind nicht öffentlich sichtbar.
+
+GitHub begrenzt öffentliche REST-Anfragen üblicherweise auf 60 pro Stunde/IP; bei Störungen oder Begrenzungen greift der lokale Fallback. Neu hochgeladene Bilder unter `/uploads/` werden vom öffentlichen Repository über raw.githubusercontent.com geladen. Niemals private Daten oder Secrets in ein öffentliches Repository speichern. Neue Artikel benötigen JavaScript; frische vorgerenderte Suchmaschinen-Vorschauen und Sitemap benötigen weiterhin gelegentliche Exporte. Bereits geöffnete Seiten aktualisieren beim erneuten Laden oder Zurückkehren zum Browserfenster, nicht durch Push.
+
+Lokale Schriften garantieren keine vollständige DSGVO-Konformität; öffentliche GitHub-Abrufe übertragen die Besucher-IP und sind in der Datenschutzerklärung beschrieben. Canvas vermeidet lesbaren HTML-Text, verhindert aber nicht gezieltes Dekodieren oder OCR.

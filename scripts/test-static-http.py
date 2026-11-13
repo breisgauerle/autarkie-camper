@@ -31,7 +31,9 @@ for page in sorted(directory.rglob("index.html")):
         check(route + "/", 200, "<html")
     check(route.rstrip("/") + "/index.html", 200, "<html")
 
-for route in ["/unbekannt", "/ratgeber/fehlt", "/admin/fehlt", "/assets/fehlt.js", "/uploads/fehlt.jpg"]:
+check("/ratgeber/neuer-live-artikel", 200, "<html")
+check("/ratgeber/neuer-live-artikel/", 200, "<html")
+for route in ["/unbekannt", "/ratgeber/fehlt.png", "/admin/fehlt", "/assets/fehlt.js", "/uploads/fehlt.jpg"]:
     check(route, 404, "Seite nicht gefunden")
 
 for asset in sorted((directory / "assets").iterdir()):

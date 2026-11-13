@@ -26,6 +26,8 @@ export const Route = createFileRoute("/datenschutz")({
       <p>Beim Klick auf Partnerlinks (Amazon, Awin, TradeTracker, Maentum, ADCELL) wirst du zur Seite des Anbieters weitergeleitet; dort können Cookies zur Provisionszuordnung gesetzt werden.</p>
       <h2 className="text-xl font-semibold text-foreground">Schriftarten</h2>
       <p>Die Schriftarten Manrope und Fraunces werden lokal von dieser Website geladen. Beim Laden der Schriften wird keine Verbindung zu Google hergestellt.</p>
+      <h2 className="text-xl font-semibold text-foreground">Aktuelle Artikel von GitHub</h2>
+      <p>Für aktuelle Beiträge ruft dein Browser öffentliche Artikel von GitHub ab. Dabei erhält GitHub insbesondere deine IP-Adresse und technische Verbindungsdaten. Neu hochgeladene Artikelbilder werden gegebenenfalls von raw.githubusercontent.com geladen. Die Verarbeitung dient der Bereitstellung aktueller Inhalte (Art. 6 Abs. 1 lit. f DSGVO); hierbei werden keine GitHub-Anmeldedaten oder Analyse-Cookies verwendet. Informationen findest du in der Datenschutzerklärung von GitHub.</p>
       <h2 className="text-xl font-semibold text-foreground">Deine Rechte</h2>
       <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Widerspruch sowie ein Beschwerderecht bei einer Aufsichtsbehörde.</p>
     </div>

@@ -17,6 +17,8 @@ ErrorDocument 404 /404/index.html
   # Existing directories retain normal DirectoryIndex handling (including /admin/).
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
+   # Only new extensionless article URLs use the client shell; assets retain real 404s.
+   RewriteRule ^ratgeber/[^/.]+/?$ _shell/index.html [L]
   # No catch-all to index.html: unknown pages and missing assets stay HTTP 404.
 </IfModule>
 

@@ -1,4 +1,5 @@
-import { parseArticleBody, type ArticleBlock } from "./article-body";
+import { type ArticleBlock } from "./article-body";
+import { parseArticleFile } from "./article-parser";
 import settingsJson from "@/content/settings/site.json";
 import type { AffiliateLink } from "./affiliate-links";
 
@@ -22,11 +23,7 @@ export const products: Product[] = Object.entries(productFiles)
 const articleFiles = import.meta.glob<string>("/src/content/articles/*.md", { eager: true, query: "?raw", import: "default" });
 export const articles: Article[] = Object.entries(articleFiles)
   .map(([p, raw]) => {
-    // Decap "json-frontmatter": a JSON object whose closing brace sits at line start, then Markdown.
-    const end = raw.search(/\n\}\s*(\n|$)/) + 2;
-    const meta = JSON.parse(raw.slice(0, end));
-    const body = raw.slice(end);
-    return { ...meta, slug: (p.split("/").pop() ?? "").replace(".md", ""), blocks: parseArticleBody(body) };
+    return parseArticleFile(raw, (p.split("/").pop() ?? "").replace(".md", ""));
   })
   .sort((a, b) => b.date.localeCompare(a.date));
 

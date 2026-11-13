@@ -1,11 +1,12 @@
-import { createFileRoute, notFound, Link } from "@tanstack/react-router";
-import { articles } from "@/lib/content";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useArticles } from "@/components/site/LiveArticles";
+import { articles, type Article as ArticleData } from "@/lib/content";
 import { ArticleBody } from "@/components/site/ArticleBody";
 
 export const Route = createFileRoute("/ratgeber/$slug")({
-  loader: ({ params }) => {
-    const a = articles.find((x) => x.slug === params.slug);
-    if (!a) throw notFound();
+  loader: ({ params, context }) => {
+    const source = context.queryClient.getQueryData<ArticleData[]>(["public-github-articles"]) ?? articles;
+    const a = source.find((x) => x.slug === params.slug);
     return a;
   },
   head: ({ loaderData: a }) => ({
@@ -22,14 +23,25 @@ export const Route = createFileRoute("/ratgeber/$slug")({
             { name: "twitter:image", content: a.image },
           ] : []),
         ]
-      : [{ title: "Artikel nicht gefunden" }, { name: "robots", content: "noindex" }],
+      : [
+          { title: "Artikel | autarkie-camper.de" },
+          { name: "description", content: "Aktuelle Ratgeber und Testberichte für autarkes Camping." },
+          { property: "og:title", content: "Artikel | autarkie-camper.de" },
+          { property: "og:description", content: "Aktuelle Ratgeber und Testberichte für autarkes Camping." },
+          { property: "og:type", content: "article" },
+          { name: "twitter:card", content: "summary_large_image" },
+          { name: "robots", content: "noindex" },
+        ],
   }),
   notFoundComponent: () => <div className="mx-auto max-w-3xl px-4 py-20"><h1 className="text-3xl">Artikel nicht gefunden</h1><Link to="/ratgeber" className="text-primary underline">Zum Ratgeber</Link></div>,
   component: Article,
 });
 
 function Article() {
-  const a = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  const { articles: live, pending } = useArticles();
+  const a = live.find(article => article.slug === slug);
+  if (!a) return <div className="mx-auto max-w-3xl px-4 py-20" aria-live="polite"><h1 className="text-3xl">{pending ? "Artikel wird geladen …" : "Artikel nicht gefunden"}</h1>{!pending && <Link to="/ratgeber" className="text-primary underline">Zum Ratgeber</Link>}</div>;
   return (
     <article className="mx-auto max-w-3xl px-4 py-12">
       <p className="text-sm font-semibold uppercase tracking-wider text-primary">{a.type === "testbericht" ? "Testbericht" : "Ratgeber"} · {new Date(a.date).toLocaleDateString("de-DE")}</p>

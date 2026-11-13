@@ -21,7 +21,13 @@ export function parseAffiliateBox(source: string): AffiliateBoxData | undefined 
 }
 
 const markdown = new Marked({ gfm: true, breaks: false });
-markdown.use({ renderer: { table(token: Tokens.Table) {
+const escapeHtml = (value: string) => value.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] ?? c);
+const safeMarkdownUrl = (url: string) => /^(https?:\/\/|\/?uploads\/|\/[^/]|#[\w-])/.test(url) && !/[\u0000-\u0020]/.test(url);
+markdown.use({ renderer: {
+  html(token) { return escapeHtml(token.text); },
+  link(token) { const text = this.parser.parseInline(token.tokens); return safeMarkdownUrl(token.href) ? `<a href="${escapeHtml(token.href)}">${text}</a>` : text; },
+  image(token) { return safeMarkdownUrl(token.href) ? `<img src="${escapeHtml(token.href)}" alt="${escapeHtml(token.text)}" loading="lazy">` : escapeHtml(token.text); },
+  table(token: Tokens.Table) {
   const cell = (value: Tokens.TableCell, tag: "th" | "td") => `<${tag}${tag === "th" ? ' scope="col"' : ""}${value.align ? ` class="table-${value.align}"` : ""}>${this.parser.parseInline(value.tokens)}</${tag}>`;
   return `<div class="article-table-scroll" role="region" aria-label="Vergleichstabelle" tabindex="0"><table><thead><tr>${token.header.map(value => cell(value, "th")).join("")}</tr></thead><tbody>${token.rows.map(row => `<tr>${row.map(value => cell(value, "td")).join("")}</tr>`).join("")}</tbody></table></div>`;
 } } });

@@ -11,7 +11,8 @@ export function ProtectedText({ lines, label }: { lines: number[][]; label: stri
     const dpr = window.devicePixelRatio || 1;
     const css = getComputedStyle(c);
     const font = `16px ${css.fontFamily}`;
-    const ctx = c.getContext("2d")!;
+    const ctx = c.getContext("2d");
+    if (!ctx) return;
     ctx.font = font;
     const text = lines.map(decode);
     const w = Math.ceil(Math.max(...text.map((t) => ctx.measureText(t).width))) + 4;

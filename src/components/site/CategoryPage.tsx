@@ -1,10 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { products, articles } from "@/lib/content";
+import { products } from "@/lib/content";
+import { useArticles } from "./LiveArticles";
 import { CATEGORIES } from "@/lib/nav";
 import { ProductCard } from "./ProductCard";
 
 export function CategoryPage({ slug }: { slug: (typeof CATEGORIES)[number]["slug"] }) {
-  const cat = CATEGORIES.find((c) => c.slug === slug)!;
+  const { articles } = useArticles();
+  const cat = CATEGORIES.find((c) => c.slug === slug);
+  if (!cat) return null;
   const list = products.filter((p) => p.category === slug);
   const posts = articles.filter((a) => a.category === slug);
   return (

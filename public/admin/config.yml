@@ -13,7 +13,7 @@ local_backend: true
 locale: de
 media_folder: public/uploads
 public_folder: /uploads
-publish_mode: editorial_workflow
+publish_mode: simple
 
 collections:
   - name: setup
@@ -54,7 +54,7 @@ collections:
       - { name: summary, label: Kurzbeschreibung, widget: text }
       - { name: seo_title, label: "SEO-Titel", widget: string, required: false }
       - { name: seo_description, label: "SEO-Beschreibung (max. 160 Zeichen)", widget: text, required: false }
-      - { name: body, label: Text, widget: markdown }
+      - { name: body, label: Text, widget: markdown, editor_components: [image, code-block, produkt-kaufbox] }
 
   - name: products
     label: "📊 Vergleichstabellen (Produkte)"

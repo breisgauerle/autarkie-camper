@@ -14,7 +14,7 @@ for (const page of pages) {
   }
   for (const match of html.matchAll(/(?:src|href)="(\/assets\/[^"?#]+)(?:[^" ]*)"/g)) await access(join(directory, match[1]));
 }
-for (const file of [".htaccess", "admin/index.html", "admin/config.yml", "admin/affiliate-box.js", "robots.txt", "favicon.png"]) await access(join(directory, file));
+for (const file of [".htaccess", "_shell/index.html", "admin/index.html", "admin/config.yml", "admin/affiliate-box.js", "robots.txt", "favicon.png"]) await access(join(directory, file));
 for (const file of (await readdir("src/assets")).filter(file => file.endsWith(".asset.json"))) {
   const pointer = JSON.parse(await readFile(join("src/assets", file), "utf8"));
   const bytes = await readFile(join(directory, pointer.url));

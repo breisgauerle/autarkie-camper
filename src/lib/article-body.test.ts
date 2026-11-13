@@ -12,6 +12,13 @@ function editor(): Editor {
 }
 
 describe("Article purchase boxes", () => {
+  it("does not execute public Markdown HTML or executable destinations", () => {
+    const blocks = parseArticleBody('<script>alert(1)</script>\n\n[Bad](javascript:alert%281%29)\n\n![Bad](data:text/html,bad)');
+    const html = blocks.filter(block => block.type === "html").map(block => block.html).join("");
+    expect(html).not.toContain("<script>");
+    expect(html).not.toContain('href="javascript:');
+    expect(html).not.toContain('src="data:');
+  });
   it("round-trips all editor fields into three named frontend offers", () => {
     const widget = editor();
     const data = { product: 'Dometic CFX3 35 "Pro"', price: "ca. 849 €", shop1_name: "Shop A", shop1_url: "https://shop-a.example/p", shop2_name: "Shop B", shop2_url: "https://shop-b.example/p", shop3_name: "Amazon", shop3_url: "https://www.amazon.de/dp/B0B6GQ2C5P?tag=autarkie-21" };

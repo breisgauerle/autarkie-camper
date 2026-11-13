@@ -32,13 +32,13 @@ use the editor.
 ## Project rules
 - Uploaded site logos use a CDN asset pointer in the shared header and a separate padded 64px public favicon so navigation stays consistent without shipping the full image as an icon.
 - Article purchase boxes are stored as fenced `produkt-kaufbox` JSON blocks; keep the Decap editor serializer and browser-safe article parser compatible, rendering validated offers through the shared Button component so static export works without a runtime service.
-- Content (articles, products, settings) lives as files in src/content and is edited via Decap CMS (public/admin/config.yml); pages read it with import.meta.glob so the site needs no database.
-- Articles use Decap json-frontmatter (JSON object, then Markdown); keep the parser in src/lib/content.ts in sync with that format.
+- Content lives in src/content and Decap; articles share one browser-only public GitHub refresh configured from the allowlisted repo/branch in admin/config.yml with local import.meta.glob fallback, while products/settings remain build-time files, so FTP hosting needs no server or credentials.
+- Articles use Decap json-frontmatter and one shared validated parser for local and public GitHub files so editor content behaves consistently.
 - Admin status shows only validated allowlisted Decap settings; its explicit read-only GitHub check uses the existing decap-cms-user GitHub session only against api.github.com with redirects disabled and sanitized results, while Netlify account setup stays unverified.
 - Fonts are bundled from Fontsource packages rather than external stylesheets to avoid third-party font requests.
 - Products use an optional affiliate_links list capped at three validated HTTPS offers; an explicit list replaces legacy offers while absent lists retain legacy Amazon tagging.
 - Static export enumerates public routes and article files at build time, excludes the existing static Decap admin entry from prerendering, and uploads only verified dist/client output to Apache hosting.
-- Apache serves exported route index files before directory handling and uses the shared prerendered /404 page as ErrorDocument; missing URLs and assets must retain HTTP 404, never an HTTP 200 SPA fallback.
+- Apache serves exported routes first and a TanStack-generated client shell only for new extensionless article URLs; all other missing URLs/assets retain HTTP 404 through the script-free ErrorDocument, avoiding a global soft-404 fallback.
 - Preserve trailing slashes in TanStack Router so directory-serving preview/Apache URLs and slashless links do not form redirect loops during static prerendering.
 - Run prepare-static.mjs before Apache packaging to remove hydration scripts from ErrorDocument (the original unknown URL remains in the address bar) and strip Worker-only _headers.
 - Apache preparation materializes asset-pointer URLs under their exact export paths using a public origin and validates downloaded type/size so CDN-backed images also work on independent hosting.

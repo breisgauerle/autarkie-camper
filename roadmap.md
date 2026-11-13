@@ -1,4 +1,7 @@
 # Requested updates
+- [x] Fetch published GitHub articles with local fallback across home, guides, categories and direct article URLs; verified with simulated public responses (actual repository returns 404).
+- [x] Preserve purchase boxes and Markdown styling; verify local fonts, protected contact and analytics consent.
+- [x] Configure a scoped Apache article shell and document the FTP workflow; application tests and browser checks passed, fresh Apache export not exercised in this request.
 - [x] Create a fresh Alfahosting package with the logo and all current changes, including locally available CDN images.
 - [x] Verify the fresh export under Apache and in desktop/mobile browsers; deliver the inspected ZIP.
 - [x] Add the Decap Produkt-Kaufbox editor form and safe article rendering with up to three shop buttons.

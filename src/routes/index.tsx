@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Zap, Wifi, Snowflake, Droplets, Calculator, BookOpen } from "lucide-react";
 import hero from "@/assets/hero-camper.jpg";
 import { Button } from "@/components/ui/button";
-import { articles } from "@/lib/content";
+import { useArticles } from "@/components/site/LiveArticles";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,6 +28,7 @@ const TILES = [
 ] as const;
 
 function Index() {
+  const { articles } = useArticles();
   return (
     <>
       <section className="relative isolate overflow-hidden">
