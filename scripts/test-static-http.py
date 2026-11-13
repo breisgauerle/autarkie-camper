@@ -40,5 +40,12 @@ for asset in sorted((directory / "assets").iterdir()):
         assert headers.get_content_type() == "font/woff2", asset.name
 check("/admin/config.yml", 200, "name: github")
 check("/robots.txt", 200)
+check("/favicon.png", 200)
+check("/admin/affiliate-box.js", 200, "Produkt-Kaufbox")
+for asset in sorted((directory / "__l5e").rglob("*")):
+    if asset.is_file():
+        status, headers, body = request("/" + str(asset.relative_to(directory)))
+        assert status == 200 and body == asset.read_bytes(), asset
+        checks += 1
 check("/.htaccess", 403)
 print(f"PASS: {checks} HTTP checks; deep links, index files, assets, admin, MIME types and genuine 404 fallback.")

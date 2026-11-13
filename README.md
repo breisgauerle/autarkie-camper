@@ -93,11 +93,13 @@ In der Redaktion unter **Vergleichstabellen (Produkte) → Händlerangebote** k�
 ```sh
 bun install
 bun run build
-node scripts/prepare-static.mjs dist/client
+node scripts/prepare-static.mjs dist/client https://id-preview--8ef9999b-ffc2-4343-b9ac-1f965e25c968.lovable.app
 node scripts/verify-static.mjs dist/client
 ```
 
 Der Build rendert alle öffentlichen Seiten, alle Markdown-Artikel und die Admin-Statusseite vorab als HTML. `/admin/index.html` bleibt das vorhandene Decap CMS. Es ist kein Node-Server bei Alfahosting erforderlich; Rechner, Cookie-Einstellungen und GitHub-Prüfung laufen im Browser.
+
+Die Vorbereitung lädt öffentliche CDN-Bilder in den Ordner `__l5e` des Exports herunter. Diesen Ordner ebenfalls hochladen: Er enthält insbesondere das Logo, damit dieses bei Alfahosting ohne Lovable-Bilddienst verfügbar ist. Als letzten Parameter eine erreichbare öffentliche Vorschau-Adresse angeben.
 
 Nach erfolgreicher Prüfung den **Inhalt von `dist/client/`**, einschließlich der versteckten `.htaccess`, unverändert in das Dokumentenverzeichnis der Domain bei Alfahosting hochladen. Nicht `dist/server`, Quellcode, `.env` oder `node_modules` hochladen. Die Ordner `assets`, `admin`, `uploads` (falls vorhanden) und alle Seitenordner müssen erhalten bleiben. Die Konfiguration setzt ein Apache-Webhosting mit erlaubter `.htaccess`-Nutzung und eine Domaininstallation im Stammverzeichnis voraus. HTTPS bei Alfahosting aktivieren.
 

@@ -41,3 +41,4 @@ use the editor.
 - Apache serves exported route index files before directory handling and uses the shared prerendered /404 page as ErrorDocument; missing URLs and assets must retain HTTP 404, never an HTTP 200 SPA fallback.
 - Preserve trailing slashes in TanStack Router so directory-serving preview/Apache URLs and slashless links do not form redirect loops during static prerendering.
 - Run prepare-static.mjs before Apache packaging to remove hydration scripts from ErrorDocument (the original unknown URL remains in the address bar) and strip Worker-only _headers.
+- Apache preparation materializes asset-pointer URLs under their exact export paths using a public origin and validates downloaded type/size so CDN-backed images also work on independent hosting.

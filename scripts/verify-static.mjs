@@ -14,7 +14,14 @@ for (const page of pages) {
   }
   for (const match of html.matchAll(/(?:src|href)="(\/assets\/[^"?#]+)(?:[^" ]*)"/g)) await access(join(directory, match[1]));
 }
-for (const file of [".htaccess", "admin/index.html", "admin/config.yml", "robots.txt", "favicon.ico"]) await access(join(directory, file));
+for (const file of [".htaccess", "admin/index.html", "admin/config.yml", "admin/affiliate-box.js", "robots.txt", "favicon.png"]) await access(join(directory, file));
+for (const file of (await readdir("src/assets")).filter(file => file.endsWith(".asset.json"))) {
+  const pointer = JSON.parse(await readFile(join("src/assets", file), "utf8"));
+  const bytes = await readFile(join(directory, pointer.url));
+  if (bytes.length !== pointer.size) throw new Error(`Missing or incomplete localized asset: ${file}`);
+}
+const homepage = await readFile(join(directory, "index.html"), "utf8");
+if (!homepage.includes('href="/favicon.png"')) throw new Error("Current logo favicon missing");
 const assets = await readdir(join(directory, "assets"));
 if (!assets.some(file => file.endsWith(".woff2"))) throw new Error("Local WOFF2 fonts missing");
 const apache = await readFile(join(directory, ".htaccess"), "utf8");
