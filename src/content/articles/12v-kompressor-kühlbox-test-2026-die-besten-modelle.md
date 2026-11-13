@@ -81,7 +81,7 @@ Die CFX3 35 ist das Komfortmodell im Vergleich. Sie kühlt bis **\-22 °C** und 
 **Für wen geeignet?** Für Camper, die regelmäßig einfrieren wollen, Wert auf Komfort legen und bereit sind, dafür mehr zu zahlen.
 
 ```produkt-kaufbox
-{"product":"Dometic CFX3 35","price":"","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Bei Amazon ansehen","shop3_url":""}
+{"product":"Dometic CFX3 35","price":"","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Bei Amazon ansehen","shop3_url":"https://link.amazon/B09lyFFjE"}
 ```
 
 ### 2. Engel MT35F – Robust, langlebig und mit niedriger Leistungsaufnahme
