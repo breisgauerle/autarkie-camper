@@ -1,6 +1,7 @@
 """Check a deployed static export: python3 scripts/test-static-http.py URL UPLOAD_DIR."""
 import sys
 from pathlib import Path
+from urllib.parse import quote
 from urllib.request import urlopen
 from urllib.error import HTTPError
 
@@ -9,8 +10,9 @@ directory = Path(sys.argv[2])
 checks = 0
 
 def request(path):
+    # Article slugs may contain umlauts; browsers send those percent-encoded.
     try:
-        response = urlopen(base + path, timeout=20)
+        response = urlopen(base + quote(path), timeout=20)
     except HTTPError as error:
         response = error
     return response.status, response.headers, response.read()

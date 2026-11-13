@@ -17,7 +17,10 @@ const articlePaths = readdirSync(new URL("./src/content/articles/", import.meta.
 
 export default defineConfig({
   tanstackStart: {
-    spa: { enabled: true, prerender: { outputPath: "/_shell" } },
+    // The shell document for new article URLs must be rendered at its own path:
+    // the prerender queue skips a page whose path was already listed, and paths
+    // outside the router 404, so mask it behind an article-style URL.
+    spa: { enabled: true, maskPath: "/ratgeber/__shell", prerender: { outputPath: "/_shell" } },
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },

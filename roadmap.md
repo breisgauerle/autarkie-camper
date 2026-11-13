@@ -1,4 +1,5 @@
 # Requested updates
+- [x] Deliver the complete site as a download: export rebuilt with a working article shell, 38 application tests, 89 Apache checks and desktop/mobile browser verification; inspected ZIP saved to Files.
 - [x] Fetch published GitHub articles with local fallback across home, guides, categories and direct article URLs; verified with simulated public responses (actual repository returns 404).
 - [x] Preserve purchase boxes and Markdown styling; verify local fonts, protected contact and analytics consent.
 - [x] Configure a scoped Apache article shell and document the FTP workflow; application tests and browser checks passed, fresh Apache export not exercised in this request.

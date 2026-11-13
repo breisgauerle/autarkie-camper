@@ -31,5 +31,14 @@ const html = await readFile(errorFile, "utf8");
 // would replace the error page with that unrelated URL's route. Keep this fallback
 // independent of JavaScript; local CSS/fonts and the ordinary home link still work.
 await writeFile(errorFile, html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ""));
+// The framework writes the client shell as one file; .htaccess serves it from
+// the directory URL, so move it into place and keep it out of the root listing.
+const shellFile = join(directory, "_shell.html");
+const shell = await readFile(shellFile, "utf8");
+if (!/<html\b/i.test(shell) || !/<script\b/i.test(shell)) throw new Error("Client shell is not a bootable HTML document: _shell.html");
+await mkdir(join(directory, "_shell"), { recursive: true });
+await writeFile(join(directory, "_shell", "index.html"), shell);
+await rm(shellFile);
+console.log("Apache article shell: _shell/index.html");
 await rm(join(directory, "_headers"), { force: true });
 console.log("Apache export prepared: script-free 404 fallback; Worker-only headers removed.");

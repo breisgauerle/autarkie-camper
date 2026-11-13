@@ -39,6 +39,7 @@ use the editor.
 - Products use an optional affiliate_links list capped at three validated HTTPS offers; an explicit list replaces legacy offers while absent lists retain legacy Amazon tagging.
 - Static export enumerates public routes and article files at build time, excludes the existing static Decap admin entry from prerendering, and uploads only verified dist/client output to Apache hosting.
 - Apache serves exported routes first and a TanStack-generated client shell only for new extensionless article URLs; all other missing URLs/assets retain HTTP 404 through the script-free ErrorDocument, avoiding a global soft-404 fallback.
+- The export's client shell must be prerendered at a mask path that is not itself a listed page (the prerender queue skips duplicate paths and unknown routes 404), and prepare-static.mjs moves the resulting file to the shell directory referenced by .htaccess.
 - Preserve trailing slashes in TanStack Router so directory-serving preview/Apache URLs and slashless links do not form redirect loops during static prerendering.
 - Run prepare-static.mjs before Apache packaging to remove hydration scripts from ErrorDocument (the original unknown URL remains in the address bar) and strip Worker-only _headers.
 - Apache preparation materializes asset-pointer URLs under their exact export paths using a public origin and validates downloaded type/size so CDN-backed images also work on independent hosting.
