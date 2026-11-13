@@ -1,4 +1,4 @@
-import { marked } from "marked";
+import { parseArticleBody, type ArticleBlock } from "./article-body";
 import settingsJson from "@/content/settings/site.json";
 import type { AffiliateLink } from "./affiliate-links";
 
@@ -9,7 +9,7 @@ export type Product = {
 };
 export type Article = {
   slug: string; title: string; date: string; category: string; type: string; image?: string;
-  summary: string; seo_title?: string; seo_description?: string; html: string;
+  summary: string; seo_title?: string; seo_description?: string; blocks: ArticleBlock[];
 };
 export type Settings = typeof settingsJson;
 export const settings: Settings = settingsJson;
@@ -26,7 +26,7 @@ export const articles: Article[] = Object.entries(articleFiles)
     const end = raw.search(/\n\}\s*(\n|$)/) + 2;
     const meta = JSON.parse(raw.slice(0, end));
     const body = raw.slice(end);
-    return { ...meta, slug: (p.split("/").pop() ?? "").replace(".md", ""), html: marked.parse(body, { async: false }) as string };
+    return { ...meta, slug: (p.split("/").pop() ?? "").replace(".md", ""), blocks: parseArticleBody(body) };
   })
   .sort((a, b) => b.date.localeCompare(a.date));
 

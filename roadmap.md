@@ -1,4 +1,6 @@
 # Requested updates
+- [x] Add the Decap Produkt-Kaufbox editor form and safe article rendering with up to three shop buttons.
+- [x] Style article tables, headings and lists; test editor round-trips and desktop/mobile article rendering.
 - [x] Serve Manrope and Fraunces locally and update privacy wording.
 - [x] Add a CMS product template supporting at most three labelled affiliate links, preserving existing products.
 - [x] Prepare static HTML export configuration, validation script and Alfahosting upload instructions.

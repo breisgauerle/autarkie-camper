@@ -1,5 +1,6 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { articles } from "@/lib/content";
+import { ArticleBody } from "@/components/site/ArticleBody";
 
 export const Route = createFileRoute("/ratgeber/$slug")({
   loader: ({ params }) => {
@@ -16,6 +17,10 @@ export const Route = createFileRoute("/ratgeber/$slug")({
           { property: "og:description", content: a.seo_description || a.summary },
           { property: "og:type", content: "article" },
           { name: "twitter:card", content: "summary_large_image" },
+          ...(a.image && /^https:\/\//.test(a.image) ? [
+            { property: "og:image", content: a.image },
+            { name: "twitter:image", content: a.image },
+          ] : []),
         ]
       : [{ title: "Artikel nicht gefunden" }, { name: "robots", content: "noindex" }],
   }),
@@ -31,7 +36,7 @@ function Article() {
       <h1 className="mt-2 text-4xl font-semibold leading-tight md:text-5xl">{a.title}</h1>
       <p className="mt-4 text-lg text-muted-foreground">{a.summary}</p>
       {a.image && <img src={a.image} alt="" className="mt-8 w-full rounded-xl" />}
-      <div className="prose-article mt-8" dangerouslySetInnerHTML={{ __html: a.html }} />
+      <ArticleBody blocks={a.blocks} />
     </article>
   );
 }
