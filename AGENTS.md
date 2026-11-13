@@ -30,6 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
+- Uploaded site logos use a CDN asset pointer in the shared header and a separate padded 64px public favicon so navigation stays consistent without shipping the full image as an icon.
 - Article purchase boxes are stored as fenced `produkt-kaufbox` JSON blocks; keep the Decap editor serializer and browser-safe article parser compatible, rendering validated offers through the shared Button component so static export works without a runtime service.
 - Content (articles, products, settings) lives as files in src/content and is edited via Decap CMS (public/admin/config.yml); pages read it with import.meta.glob so the site needs no database.
 - Articles use Decap json-frontmatter (JSON object, then Markdown); keep the parser in src/lib/content.ts in sync with that format.

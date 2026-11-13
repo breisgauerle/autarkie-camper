@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Mountain } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo-autarkie-camper.png.asset.json";
+import { Button } from "@/components/ui/button";
 
 const NAV = [
   { to: "/strom-solar", label: "Strom & Solar" },
@@ -16,8 +18,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-sidebar-border bg-secondary text-secondary-foreground">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
-        <Link to="/" className="flex items-center gap-2 font-display text-lg font-semibold">
-          <Mountain className="size-6 text-primary-glow" /><span>autarkie-camper<span className="text-primary-glow">.de</span></span>
+        <Link to="/" aria-label="autarkie-camper.de – Startseite" className="flex min-w-0 shrink-0 items-center gap-3 font-display text-base font-semibold sm:text-lg">
+          <img src={logo.url} alt="" width={64} height={64} className="size-14 shrink-0 object-contain sm:size-16" fetchPriority="high" /><span>autarkie-camper<span className="text-primary-glow">.de</span></span>
         </Link>
         <nav className="hidden gap-1 xl:flex">
           {NAV.map((n) => (
@@ -26,7 +28,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <button className="xl:hidden" aria-label="Menü" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
+        <Button variant="ghost" size="icon" className="shrink-0 hover:bg-sidebar-accent hover:text-secondary-foreground xl:hidden" aria-label="Menü" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
       </div>
       {open && (
         <nav className="flex flex-col border-t border-sidebar-border px-4 py-2 xl:hidden">
