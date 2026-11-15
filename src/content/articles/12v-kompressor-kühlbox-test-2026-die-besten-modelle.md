@@ -111,7 +111,7 @@ Die Engel MT35F steht für solide Verarbeitung mit Stahlblechkorpus. Mit 32 W is
 **Für wen geeignet?** Für Dauerreisende und Vanlifer, die die Box fest einbauen und auf Langlebigkeit setzen.
 
 ```produkt-kaufbox
-{"product":"Engel MT35F","price":"ca. 1.077,-","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Preis bei Amazon prüfen","shop3_url":"https://link.amazon/B0iACdkJS"}
+{"product":"Engel MT35F","price":"","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Preis bei Amazon prüfen","shop3_url":"https://link.amazon/B0iACdkJS"}
 ```
 
 ### 3. Dometic CFF 35 – Preis-Leistungs-Sieger mit sparsamem Betrieb
