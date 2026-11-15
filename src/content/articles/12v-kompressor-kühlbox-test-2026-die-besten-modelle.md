@@ -81,7 +81,7 @@ Die CFX3 35 ist das Komfortmodell im Vergleich. Sie kühlt bis **\-22 °C** und 
 **Für wen geeignet?** Für Camper, die regelmäßig einfrieren wollen, Wert auf Komfort legen und bereit sind, dafür mehr zu zahlen.
 
 ```produkt-kaufbox
-{"product":"Dometic CFX3 35","price":"","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Bei Amazon ansehen","shop3_url":"https://link.amazon/B09lyFFjE"}
+{"product":"Dometic CFX3 35","price":"","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Preis bei Amazon prüfen","shop3_url":"https://link.amazon/B09lyFFjE"}
 ```
 
 ### 2. Engel MT35F – Robust, langlebig und mit niedriger Leistungsaufnahme
@@ -110,7 +110,9 @@ Die Engel MT35F steht für solide Verarbeitung mit Stahlblechkorpus. Mit 32 W is
 
 **Für wen geeignet?** Für Dauerreisende und Vanlifer, die die Box fest einbauen und auf Langlebigkeit setzen.
 
-\[BUTTONS: Produktname="Engel MT35F" | Shop1="Fritz Berger" | Link1="#" | Shop2="Camping Wagner" | Link2="#" | Shop3="Amazon" | Link3="#"]
+```produkt-kaufbox
+{"product":"Engel MT35F","price":"ca. 1.077,-","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Preis bei Amazon prüfen","shop3_url":"https://link.amazon/B0iACdkJS"}
+```
 
 ### 3. Dometic CFF 35 – Preis-Leistungs-Sieger mit sparsamem Betrieb
 
@@ -139,7 +141,9 @@ Die CFF 35 ist unsere Empfehlung für die meisten Camper. Sie hat mit **34 Liter
 
 **Für wen geeignet?** Für Paare und Kleinfamilien, die eine sparsame, leise Box zum fairen Preis suchen.
 
-\[BUTTONS: Produktname="Dometic CFF 35" | Shop1="Fritz Berger" | Link1="#" | Shop2="Camping Wagner" | Link2="#" | Shop3="Amazon" | Link3="#"]
+```produkt-kaufbox
+{"product":"Dometic CFF 35","price":"","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Preis bei Amazon prüfen","shop3_url":"https://link.amazon/B01eJIJ0G"}
+```
 
 ### 4. Mobicool MCF 32 – Die Budget-Option für gelegentliche Camper
 
@@ -164,7 +168,9 @@ Die MCF 32 ist mit rund 265 € die günstigste Box im Test und mit 11,4 kg leic
 
 **Für wen geeignet?** Für Gelegenheitscamper und alle, die ohne Tiefkühlbedarf möglichst wenig investieren wollen.
 
-\[BUTTONS: Produktname="Mobicool MCF 32" | Shop1="Fritz Berger" | Link1="#" | Shop2="Camping Wagner" | Link2="#" | Shop3="Amazon" | Link3="#"]
+```produkt-kaufbox
+{"product":"Mobicool MCF 32","price":"","shop1_name":"Bei Fritz Berger ansehen","shop1_url":"","shop2_name":"Bei Camping Wagner prüfen","shop2_url":"","shop3_name":"Preis bei Amazon prüfen","shop3_url":"https://link.amazon/B0g7i8Mfo"}
+```
 
 - - -
 
