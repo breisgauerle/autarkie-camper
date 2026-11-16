@@ -3,6 +3,9 @@ import { Zap, Wifi, Snowflake, Droplets, Calculator, BookOpen } from "lucide-rea
 import hero from "@/assets/hero-camper.jpg";
 import { Button } from "@/components/ui/button";
 import { useArticles } from "@/components/site/LiveArticles";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchLiveHome, homeContent } from "@/lib/home-content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,17 +32,22 @@ const TILES = [
 
 function Index() {
   const { articles } = useArticles();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const homeQuery = useQuery({ queryKey: ["public-github-home"], queryFn: () => fetchLiveHome(), enabled: mounted, retry: false, staleTime: 0, refetchOnWindowFocus: true });
+  const home = homeQuery.data ?? homeContent;
   return (
     <>
       <section className="relative isolate overflow-hidden">
         <img src={hero} alt="Camper mit Solaranlage am Waldsee" width={1600} height={912} fetchPriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover" />
         <div className="absolute inset-0 -z-10 bg-hero-overlay" />
         <div className="mx-auto flex min-h-[70vh] max-w-7xl flex-col justify-end px-4 pb-16 pt-32 text-primary-foreground">
-          <h1 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">Frei stehen. Länger bleiben. Smart ausgestattet.</h1>
-          <p className="mt-4 max-w-xl text-lg opacity-90">Unabhängige Vergleiche für Strom, Internet, Kühlung und Wasser – damit dein Camper wirklich autark wird.</p>
+          {home.banner_slogan && <p className="mb-4 max-w-3xl whitespace-pre-line break-words text-base font-semibold">{home.banner_slogan}</p>}
+          <h1 className="max-w-3xl whitespace-pre-line break-words text-4xl font-semibold leading-tight md:text-6xl">{home.hero_heading}</h1>
+          <p className="mt-4 max-w-xl whitespace-pre-line break-words text-lg opacity-90">{home.hero_intro}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg" variant="cta"><Link to="/rechner">Stromrechner starten</Link></Button>
-            <Button asChild size="lg" variant="secondary"><Link to="/strom-solar">Powerstationen vergleichen</Link></Button>
+            <Button asChild size="lg" variant="cta" className="h-auto min-h-11 max-w-full whitespace-normal break-words text-center"><Link to="/rechner">{home.primary_button}</Link></Button>
+            <Button asChild size="lg" variant="secondary" className="h-auto min-h-11 max-w-full whitespace-normal break-words text-center"><Link to="/strom-solar">{home.secondary_button}</Link></Button>
           </div>
         </div>
       </section>
@@ -54,7 +62,8 @@ function Index() {
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-4">
-        <h2 className="text-3xl font-semibold">Neu im Ratgeber</h2>
+        <h2 className="break-words text-3xl font-semibold">{home.guides_heading}</h2>
+        {home.guides_intro && <p className="mt-4 max-w-3xl whitespace-pre-line break-words text-muted-foreground">{home.guides_intro}</p>}
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           {articles.slice(0, 4).map((a) => (
             <Link key={a.slug} to="/ratgeber/$slug" params={{ slug: a.slug }} className="rounded-xl border bg-card p-6 hover:border-primary">

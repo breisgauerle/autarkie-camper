@@ -1,17 +1,10 @@
-import { parse } from "yaml";
+import { publicGitHubRequest, publicRepository } from "./public-github";
 import type { Article } from "./content";
 import { parseArticleFile } from "./article-parser";
 
 export async function fetchLiveArticles(fallback: Article[], fetcher: typeof fetch = fetch): Promise<Article[]> {
-  const request = async (url: string, accept = "application/vnd.github+json") => {
-    const response = await fetcher(url, { headers: { Accept: accept }, credentials: "omit", redirect: "error", cache: "no-store", signal: AbortSignal.timeout(15000) });
-    if (!response.ok) throw new Error(`Public content unavailable (${response.status})`);
-    return response;
-  };
-  const config = parse(await (await request("/admin/config.yml", "text/plain")).text());
-  const repo: unknown = config?.backend?.repo;
-  const branch: unknown = config?.backend?.branch;
-  if (typeof repo !== "string" || !/^[\w-]+\/[\w.-]+$/.test(repo) || typeof branch !== "string" || !/^[\w./-]{1,100}$/.test(branch)) throw new Error("Invalid public repository configuration");
+  const request = publicGitHubRequest(fetcher);
+  const { repo, branch } = await publicRepository(request);
   const tree = await (await request(`https://api.github.com/repos/${repo}/git/trees/${encodeURIComponent(branch)}?recursive=1`)).json();
   if (!Array.isArray(tree.tree) || tree.truncated) throw new Error("Incomplete public article tree");
   const files: { path: string; sha: string }[] = tree.tree.filter((file: { path?: unknown; sha?: unknown; type?: unknown }) => file.type === "blob" && typeof file.path === "string" && /^src\/content\/articles\/[^/]+\.md$/.test(file.path) && typeof file.sha === "string" && /^[a-f0-9]{40,64}$/.test(file.sha));
