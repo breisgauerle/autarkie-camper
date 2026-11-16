@@ -1,6 +1,6 @@
 {
 "category": "kuehlung-kochen",
-  "type": "ratgeber",
+  "type": "testbericht",
   "seo_title": "12V Kompressor-Kühlbox Test 2027: Die besten Modelle",
   "seo_description": "Vergleiche die besten 12V Kompressor-Kühlboxen für Camper. Erfahre alles über Stromverbrauch, Batterielaufzeit und die richtige Kühlbox für autarkes Camping!",
   "summary": "Vergleiche die besten 12V Kompressor-Kühlboxen für Camper. Erfahre alles über Stromverbrauch, Batterielaufzeit und die richtige Kühlbox für autarkes Camping!",
