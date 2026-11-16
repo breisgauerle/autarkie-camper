@@ -19,7 +19,10 @@ export function parseHomeContent(raw: string): HomeContent {
   return result;
 }
 
-export const homeContent = parseHomeContent(JSON.stringify(localHome));
+// Never crash the page on module load: fall back to the raw local texts if validation fails.
+export const homeContent: HomeContent = (() => {
+  try { return parseHomeContent(JSON.stringify(localHome)); } catch { return { ...localHome }; }
+})();
 
 export async function fetchLiveHome(fetcher: typeof fetch = fetch): Promise<HomeContent> {
   const request = publicGitHubRequest(fetcher);
