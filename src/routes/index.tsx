@@ -6,6 +6,8 @@ import { useArticles } from "@/components/site/LiveArticles";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchLiveHome, homeContent } from "@/lib/home-content";
+import { ArticleBody } from "@/components/site/ArticleBody";
+import { parseArticleBody } from "@/lib/article-body";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,7 +65,7 @@ function Index() {
       </section>
       <section className="mx-auto max-w-7xl px-4">
         <h2 className="break-words text-3xl font-semibold">{home.guides_heading}</h2>
-        {home.guides_intro && <p className="mt-4 max-w-3xl whitespace-pre-line break-words text-muted-foreground">{home.guides_intro}</p>}
+        {home.guides_intro && <div className="mt-4 max-w-3xl break-words"><ArticleBody blocks={parseArticleBody(home.guides_intro)} /></div>}
         <div className="mt-6 grid gap-6 md:grid-cols-2">
           {articles.slice(0, 4).map((a) => (
             <Link key={a.slug} to="/ratgeber/$slug" params={{ slug: a.slug }} className="rounded-xl border bg-card p-6 hover:border-primary">

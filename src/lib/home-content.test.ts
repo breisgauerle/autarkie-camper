@@ -31,3 +31,8 @@ describe("Homepage GitHub content", () => {
     expect(parseHomeContent(JSON.stringify({ ...required, unknown: "discard" }))).toEqual({ ...required, banner_slogan: "", guides_intro: "" });
   });
 });
+describe("long homepage intro", () => {
+  it("accepts an intro text longer than 2000 characters", () => {
+    expect(parseHomeContent(JSON.stringify({ ...homeContent, guides_intro: "a".repeat(2191) })).guides_intro).toHaveLength(2191);
+  });
+});
