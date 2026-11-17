@@ -26,11 +26,11 @@ collections:
         fields:
           - { name: banner_slogan, label: "Banner-Slogan", widget: string, required: false }
           - { name: hero_heading, label: "Hauptüberschrift", widget: string }
-          - { name: hero_intro, label: "Einleitungstext", widget: text }
+          - { name: hero_intro, label: "Einleitungstext", widget: markdown, editor_components: [] }
           - { name: primary_button, label: "Beschriftung Stromrechner-Button", widget: string }
           - { name: secondary_button, label: "Beschriftung Vergleichs-Button", widget: string }
           - { name: guides_heading, label: "Überschrift Ratgeber-Bereich", widget: string }
-          - { name: guides_intro, label: "Einleitung Ratgeber-Bereich", widget: text, required: false }
+          - { name: guides_intro, label: "Startseiten-Haupttext / Einleitung Ratgeber-Bereich", widget: markdown, required: false, editor_components: [] }
 
   - name: setup
     label: "⚙️ Setup-Wizard"

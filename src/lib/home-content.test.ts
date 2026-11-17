@@ -24,11 +24,29 @@ describe("Homepage GitHub content", () => {
   it("rejects malformed documents and non-text fields", () => {
     expect(() => parseHomeContent("not json")).toThrow();
     expect(() => parseHomeContent(JSON.stringify({ ...homeContent, hero_heading: { html: "unsafe" } }))).toThrow();
-    expect(() => parseHomeContent(JSON.stringify({ ...homeContent, hero_intro: " " }))).toThrow();
+    expect(() => parseHomeContent(JSON.stringify({ ...homeContent, hero_intro: [] }))).toThrow();
   });
-  it("allows empty optional slogans and strips unknown fields", () => {
+  it("keeps an empty slogan, falls back for missing text and strips unknown fields", () => {
     const { banner_slogan, guides_intro, ...required } = homeContent;
-    expect(parseHomeContent(JSON.stringify({ ...required, unknown: "discard" }))).toEqual({ ...required, banner_slogan: "", guides_intro: "" });
+    expect(parseHomeContent(JSON.stringify({ ...required, unknown: "discard" }), homeContent)).toEqual({ ...required, banner_slogan: "", guides_intro: homeContent.guides_intro });
+  });
+  it.each(["", "  \n", "{}"])("uses readable fallback texts for an empty document: %j", raw => {
+    expect(parseHomeContent(raw, homeContent)).toEqual(homeContent);
+  });
+  it("falls back for blank fields without discarding valid saved fields", () => {
+    expect(parseHomeContent(JSON.stringify({ hero_heading: "Neue Überschrift", hero_intro: "  ", guides_intro: "\n" }), homeContent))
+      .toEqual({ ...homeContent, hero_heading: "Neue Überschrift" });
+  });
+  it("preserves saved Markdown for both introductory texts", () => {
+    const text = "## Autark unterwegs\n\n**Freiheit** genießen.\n\nEin zweiter Absatz.";
+    const result = parseHomeContent(JSON.stringify({ hero_intro: text, guides_intro: text }), homeContent);
+    expect(result.hero_intro).toBe(text);
+    expect(result.guides_intro).toBe(text);
+  });
+  it("loads an empty published file with local defaults", async () => {
+    const fetcher = vi.fn(async (url: string | URL | Request) => String(url) === "/admin/config.yml"
+      ? new Response("backend:\n  repo: breisgauerle/autarkie-camper\n  branch: main") : new Response(""));
+    expect(await fetchLiveHome(fetcher as typeof fetch)).toEqual(homeContent);
   });
 });
 describe("long homepage intro", () => {

@@ -46,7 +46,9 @@ function Index() {
         <div className="mx-auto flex min-h-[70vh] max-w-7xl flex-col justify-end px-4 pb-16 pt-32 text-primary-foreground">
           {home.banner_slogan && <p className="mb-4 max-w-3xl whitespace-pre-line break-words text-base font-semibold">{home.banner_slogan}</p>}
           <h1 className="max-w-3xl whitespace-pre-line break-words text-4xl font-semibold leading-tight md:text-6xl">{home.hero_heading}</h1>
-          <p className="mt-4 max-w-xl whitespace-pre-line break-words text-lg opacity-90">{home.hero_intro}</p>
+          <div className="prose-article mt-4 max-w-xl break-words text-lg opacity-90 [&_strong]:text-inherit [&_a]:text-inherit [&_li::marker]:text-inherit">
+            <ArticleBody blocks={parseArticleBody(home.hero_intro)} />
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" variant="cta" className="h-auto min-h-11 max-w-full whitespace-normal break-words text-center"><Link to="/rechner">{home.primary_button}</Link></Button>
             <Button asChild size="lg" variant="secondary" className="h-auto min-h-11 max-w-full whitespace-normal break-words text-center"><Link to="/strom-solar">{home.secondary_button}</Link></Button>

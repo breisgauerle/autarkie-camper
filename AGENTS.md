@@ -33,7 +33,7 @@ use the editor.
 - Uploaded site logos use a CDN asset pointer in the shared header and a separate padded 64px public favicon so navigation stays consistent without shipping the full image as an icon.
 - Article purchase boxes are stored as fenced `produkt-kaufbox` JSON blocks; keep the Decap editor serializer and browser-safe article parser compatible, rendering validated offers through the shared Button component so static export works without a runtime service.
 - Content lives in src/content and Decap; articles and homepage texts use browser-only public GitHub refreshes through shared validated repo/branch and credential-free request helpers with local fallbacks; products and other settings remain build-time files, so FTP hosting needs no server or credentials.
-- Homepage texts are validated plain strings in the Decap Settings / Home JSON document; render them as React text, preserving static prerender defaults and avoiding executable CMS markup.
+- Homepage texts remain validated strings in Decap Settings / Home JSON; render intro fields through the shared safe Markdown parser and headings/buttons as React text, using independent defaults for empty local documents and field-level local fallbacks for empty published text.
 - Articles use Decap json-frontmatter and one shared validated parser for local and public GitHub files so editor content behaves consistently.
 - Admin status shows only validated allowlisted Decap settings; its explicit read-only GitHub check uses the existing decap-cms-user GitHub session only against api.github.com with redirects disabled and sanitized results, while Netlify account setup stays unverified.
 - Fonts are bundled from Fontsource packages rather than external stylesheets to avoid third-party font requests.
