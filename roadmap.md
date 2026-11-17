@@ -1,4 +1,5 @@
 # Requested updates
+- [x] Deliver the current complete upload package: 49 tests, 15/15 exported pages, 90 Apache checks and desktop/mobile browser verification; inspected ZIP saved to Files. Alfahosting upload and public GitHub access remain external.
 - [x] Correct homepage loading and empty-document fallbacks; enable Markdown for both intro fields. All 49 tests passed; mocked GitHub refresh, empty/unavailable fallbacks and desktop/mobile display verified; isolated Decap save/read-back verified. Live GitHub publishing and Alfahosting upload not performed.
 - [x] Add Decap Settings / Home and load validated homepage texts from public GitHub with local fallback; 42 tests passed, isolated CMS publish verified, mocked public GitHub refresh and desktop/mobile fallback verified; actual GitHub login/publishing remains unverified.
 - [x] Deliver the complete site as a download: export rebuilt with a working article shell, 38 application tests, 89 Apache checks and desktop/mobile browser verification; inspected ZIP saved to Files.
