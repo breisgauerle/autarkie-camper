@@ -23,4 +23,12 @@ describe("Static export article shell", () => {
     expect(prepare).toContain('join(directory, "_shell.html")');
     expect(prepare).toContain('join(directory, "_shell", "index.html")');
   });
+
+  it("falls back to a validated local copy when the public asset origin is unreachable", () => {
+    expect(prepare).toContain("LOVABLE_LOCAL_ASSET_DIR");
+    expect(prepare).toContain("Local asset size or type mismatch");
+    // The public download path keeps validating size and content type.
+    expect(prepare).toContain('response.headers.get("content-type")');
+    expect(prepare).toContain("bytes.length !== pointer.size");
+  });
 });
